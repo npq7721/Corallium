@@ -1,28 +1,28 @@
-Bitcoin Green Core
+Corallium Core
 =====================
 
 Setup
 ---------------------
-[Bitcoin Green Core](http://savebitcoin.io) is the original Bitcoin Green client and it builds the backbone of the network. However, it downloads and stores the entire history of Bitcoin Green transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Corallium Core](http://savebitcoin.io) is the original Corallium client and it builds the backbone of the network. However, it downloads and stores the entire history of Corallium transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
-The following are some helpful notes on how to run Bitcoin Green on your native platform.
+The following are some helpful notes on how to run Corallium on your native platform.
 
 ### Unix
 
 Unpack the files into a directory and run:
 
-- bin/32/bitcoingreen-qt (GUI, 32-bit) or bin/32/bitcoingreend (headless, 32-bit)
-- bin/64/bitcoingreen-qt (GUI, 64-bit) or bin/64/bitcoingreend (headless, 64-bit)
+- bin/32/corallium-qt (GUI, 32-bit) or bin/32/coralliumd (headless, 32-bit)
+- bin/64/corallium-qt (GUI, 64-bit) or bin/64/coralliumd (headless, 64-bit)
 
 ### Windows
 
-Unpack the files into a directory, and then run bitcoingreen-qt.exe.
+Unpack the files into a directory, and then run corallium-qt.exe.
 
 ### OSX
 
-Drag BitcoinGreen-Qt to your applications folder, and then run BitcoinGreen-Qt.
+Drag Corallium-Qt to your applications folder, and then run Corallium-Qt.
 
 ### Need Help?
 
@@ -30,7 +30,7 @@ Drag BitcoinGreen-Qt to your applications folder, and then run BitcoinGreen-Qt.
 
 Building
 ---------------------
-The following are developer notes on how to build Bitcoin Green on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build Corallium on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OSX Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
@@ -38,7 +38,7 @@ The following are developer notes on how to build Bitcoin Green on your native p
 
 Development
 ---------------------
-The Bitcoin Green repo's [root README](https://github.com/bitcoingreen/bitcoingreen/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Corallium repo's [root README](https://github.com/corallium/corallium/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)

@@ -1,10 +1,10 @@
 Sample configuration files for:
 
-SystemD: bitcoingreend.service
-Upstart: bitcoingreend.conf
-OpenRC:  bitcoingreend.openrc
-         bitcoingreend.openrcconf
-CentOS:  bitcoingreend.init
+SystemD: coralliumd.service
+Upstart: coralliumd.conf
+OpenRC:  coralliumd.openrc
+         coralliumd.openrcconf
+CentOS:  coralliumd.init
 
 have been made available to assist packagers in creating node packages here.
 

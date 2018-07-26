@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Corallium
+Comment=Corallium P2P Cryptocurrency
+Exec=corallium-qt %u
+Terminal=false
+Type=Application
+Icon=corallium128
+MimeType=x-scheme-handler/corallium;
+Categories=Office;Finance;
+Name[en_US]=corallium-qt.desktop

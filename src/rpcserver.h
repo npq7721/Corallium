@@ -96,7 +96,7 @@ public:
 };
 
 /**
- * Bitcoin Green RPC command dispatcher.
+ * Corallium RPC command dispatcher.
  */
 class CRPCTable
 {

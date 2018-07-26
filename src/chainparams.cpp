@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Bitcoin Green developers
+// Copyright (c) 2017-2018 The Corallium developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -80,6 +80,36 @@ static const Checkpoints::CCheckpointData dataRegtest = {
     0,
     100};
 
+void MineGenesis(CBlock genesis)
+{
+    printf("Searching for genesis block...\n");
+    // This will figure out a valid hash and Nonce if you're
+    // creating a different genesis block:
+    uint256 hashTarget = ~uint256(0) >> 20;
+    uint256 thash;
+    while(true)
+    {
+        thash = genesis.GetHash();
+        if (thash <= hashTarget)
+            break;
+        if ((genesis.nNonce & 0xFFF) == 0)
+        {
+            //printf("nonce %08X: hash = %s (target = %s)\n", genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
+        }
+        ++genesis.nNonce;
+        if (genesis.nNonce == 0)
+        {
+           // printf("NONCE WRAPPED, incrementing time\n");
+            ++genesis.nTime;
+        }
+    }
+    printf("block.nTime = %u \n", genesis.nTime);
+    printf("block.nNonce = %u \n", genesis.nNonce);
+    printf("block.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+    printf("block.merkle = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+    std::fflush(stdout);
+}
+
 class CMainParams : public CChainParams
 {
 public:
@@ -97,7 +127,7 @@ public:
         pchMessageStart[2] = 0x12;
         pchMessageStart[3] = 0xae;
         vAlertPubKey = ParseHex("04d2df519f53e2eaa4a7d7ff3347a360520c2f4b8f07d0241b5b6ba5ce8e3d6ecba5443696473a387adff27aa6bb72b952ff23026e088cff9f47cbb387ed52c326");
-        nDefaultPort = 9333;
+        nDefaultPort = 9433;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         nSubsidyHalvingInterval = 1050000;
         nMaxReorganizationDepth = 100;
@@ -105,15 +135,15 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // Bitcoin Green: 1 day
-        nTargetSpacing = 2 * 60;  // Bitcoin Green: 2 minutes
-        nMaturity = 10;
+        nTargetTimespan = 1 * 60; // Corallium: 1 day
+        nTargetSpacing = 2 * 60;  // Corallium: 2 minutes
+        nMaturity = 50;
         nMasternodeCountDrift = 20;
         nMaxMoneyOut = 21000000 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 200;
-        nModifierUpdateBlock = 1; // we use the version 2 for BITG
+        nModifierUpdateBlock = 1; // we use the version 2 for CRLM
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -132,7 +162,7 @@ public:
          * nonce: 21256609
          * genesis_hash: 000008467c3a9c587533dea06ad9380cded3ed32f9742a6c0c1aebc21bf2bc9b
          */
-        const char* pszTimestamp = "Even With Energy Surplus, Canada Unable to Meet Electricity Demands of Bitcoin Miners";
+        const char* pszTimestamp = "People are not going to care about animal conservation unless they think that animals are worthwhile";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -146,27 +176,25 @@ public:
         genesis.nTime = 1516926684;
         genesis.nBits = 0x1e0ffff0;
         genesis.nNonce = 21256609;
-
-        hashGenesisBlock = genesis.GetHash();
+        MineGenesis(genesis);
+        //hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x000008467c3a9c587533dea06ad9380cded3ed32f9742a6c0c1aebc21bf2bc9b"));
         assert(genesis.hashMerkleRoot == uint256("0x07cbcacfc822fba6bbeb05312258fa43b96a68fc310af8dfcec604591763f7cf"));
 
         // DNS Seeding
-        vSeeds.push_back(CDNSSeedData("seed1.savebitcoin.io", "seed1.savebitcoin.io"));
-        vSeeds.push_back(CDNSSeedData("seed2.savebitcoin.io", "seed2.savebitcoin.io"));
-        vSeeds.push_back(CDNSSeedData("seed3.savebitcoin.io", "seed3.savebitcoin.io"));
+        vSeeds.push_back(CDNSSeedData("explorer", "140.82.0.37"));
 
-        // Bitcoin Green addresses start with 'G'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 38);
-        // Bitcoin Green script addresses start with '3'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 6);
-        // Bitcoin Green private keys start with 'K'
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 46);
-        // Bitcoin Green BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
+        // Corallium addresses start with 'C'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 28);
+        // Corallium script addresses start with '3'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 15);
+        // Corallium private keys start with 'K'
+        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 34);
+        // Corallium BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        // Bitcoin Green BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
+        // Corallium BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        // Bitcoin Green BIP44 coin type is '222' (0x800000de)
+        // Corallium BIP44 coin type is '222' (0x800000de)
         // BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0xde).convert_to_container<std::vector<unsigned char> >();
 
@@ -216,8 +244,8 @@ public:
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // Bitcoin Green: 1 day
-        nTargetSpacing = 2 * 60;  // Bitcoin Green: 1 minute
+        nTargetTimespan = 1 * 60; // Corallium: 1 day
+        nTargetSpacing = 2 * 60;  // Corallium: 1 minute
         nLastPOWBlock = 200;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
@@ -234,15 +262,15 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        // Testnet Bitcoin Green addresses start with 'g'
+        // Testnet Corallium addresses start with 'g'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 98);
-        // Testnet Bitcoin Green script addresses start with '5' or '6'
+        // Testnet Corallium script addresses start with '5' or '6'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 12);
         // Testnet private keys start with 'k'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 108);
-        // Testnet Bitcoin Green BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
+        // Testnet Corallium BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Bitcoin Green BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
+        // Testnet Corallium BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
         // Testnet bitcoin green BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
@@ -290,8 +318,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // Bitcoin Green: 1 day
-        nTargetSpacing = 2 * 60;        // Bitcoin Green: 1 minutes
+        nTargetTimespan = 24 * 60 * 60; // Corallium: 1 day
+        nTargetSpacing = 2 * 60;        // Corallium: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1516926684;
         genesis.nBits = 0x207fffff;

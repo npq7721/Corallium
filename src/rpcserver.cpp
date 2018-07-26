@@ -242,10 +242,10 @@ UniValue stop(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop Bitcoin Green server.");
+            "\nStop Corallium server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "Bitcoin Green server stopping";
+    return "Corallium server stopping";
 }
 
 
@@ -327,39 +327,39 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
 
-        /* Bitcoin Green features */
-        {"bitcoingreen", "masternode", &masternode, true, true, false},
-        {"bitcoingreen", "listmasternodes", &listmasternodes, true, true, false},
-        {"bitcoingreen", "getmasternodecount", &getmasternodecount, true, true, false},
-        {"bitcoingreen", "masternodeconnect", &masternodeconnect, true, true, false},
-        {"bitcoingreen", "masternodecurrent", &masternodecurrent, true, true, false},
-        {"bitcoingreen", "masternodedebug", &masternodedebug, true, true, false},
-        {"bitcoingreen", "startmasternode", &startmasternode, true, true, false},
-        {"bitcoingreen", "createmasternodekey", &createmasternodekey, true, true, false},
-        {"bitcoingreen", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
-        {"bitcoingreen", "listmasternodeconf", &listmasternodeconf, true, true, false},
-        {"bitcoingreen", "getmasternodestatus", &getmasternodestatus, true, true, false},
-        {"bitcoingreen", "getmasternodewinners", &getmasternodewinners, true, true, false},
-        {"bitcoingreen", "getmasternodescores", &getmasternodescores, true, true, false},
-        {"bitcoingreen", "mnbudget", &mnbudget, true, true, false},
-        {"bitcoingreen", "preparebudget", &preparebudget, true, true, false},
-        {"bitcoingreen", "submitbudget", &submitbudget, true, true, false},
-        {"bitcoingreen", "mnbudgetvote", &mnbudgetvote, true, true, false},
-        {"bitcoingreen", "getbudgetvotes", &getbudgetvotes, true, true, false},
-        {"bitcoingreen", "getnextsuperblock", &getnextsuperblock, true, true, false},
-        {"bitcoingreen", "getbudgetprojection", &getbudgetprojection, true, true, false},
-        {"bitcoingreen", "getbudgetinfo", &getbudgetinfo, true, true, false},
-        {"bitcoingreen", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
-        {"bitcoingreen", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        {"bitcoingreen", "checkbudgets", &checkbudgets, true, true, false},
-        {"bitcoingreen", "mnsync", &mnsync, true, true, false},
-        {"bitcoingreen", "spork", &spork, true, true, false},
-        {"bitcoingreen", "preparecommunityproposal", &preparecommunityproposal, true, true, false},
-        {"bitcoingreen", "submitcommunityproposal", &submitcommunityproposal, true, true, false},
-        {"bitcoingreen", "getcommunityinfo", &getcommunityinfo, true, true, false},
-        {"bitcoingreen", "checkcommunityproposals", &checkcommunityproposals, true, true, false},
-        {"bitcoingreen", "getcommunityproposalvotes", &getcommunityproposalvotes, true, true, false},
-        {"bitcoingreen", "mncommunityvote", &mncommunityvote, true, true, false},
+        /* Corallium features */
+        {"corallium", "masternode", &masternode, true, true, false},
+        {"corallium", "listmasternodes", &listmasternodes, true, true, false},
+        {"corallium", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"corallium", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"corallium", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"corallium", "masternodedebug", &masternodedebug, true, true, false},
+        {"corallium", "startmasternode", &startmasternode, true, true, false},
+        {"corallium", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"corallium", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"corallium", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"corallium", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"corallium", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"corallium", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"corallium", "mnbudget", &mnbudget, true, true, false},
+        {"corallium", "preparebudget", &preparebudget, true, true, false},
+        {"corallium", "submitbudget", &submitbudget, true, true, false},
+        {"corallium", "mnbudgetvote", &mnbudgetvote, true, true, false},
+        {"corallium", "getbudgetvotes", &getbudgetvotes, true, true, false},
+        {"corallium", "getnextsuperblock", &getnextsuperblock, true, true, false},
+        {"corallium", "getbudgetprojection", &getbudgetprojection, true, true, false},
+        {"corallium", "getbudgetinfo", &getbudgetinfo, true, true, false},
+        {"corallium", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
+        {"corallium", "mnfinalbudget", &mnfinalbudget, true, true, false},
+        {"corallium", "checkbudgets", &checkbudgets, true, true, false},
+        {"corallium", "mnsync", &mnsync, true, true, false},
+        {"corallium", "spork", &spork, true, true, false},
+        {"corallium", "preparecommunityproposal", &preparecommunityproposal, true, true, false},
+        {"corallium", "submitcommunityproposal", &submitcommunityproposal, true, true, false},
+        {"corallium", "getcommunityinfo", &getcommunityinfo, true, true, false},
+        {"corallium", "checkcommunityproposals", &checkcommunityproposals, true, true, false},
+        {"corallium", "getcommunityproposalvotes", &getcommunityproposalvotes, true, true, false},
+        {"corallium", "mncommunityvote", &mncommunityvote, true, true, false},
 #ifdef ENABLE_WALLET
 
         /* Wallet */
@@ -1076,7 +1076,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(string methodname, string args)
 {
-    return "> bitcoingreen-cli " + methodname + " " + args + "\n";
+    return "> corallium-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(string methodname, string args)
