@@ -53,11 +53,11 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x0x00000c1312f4202efd68ec74da3a646f4c99bd6817eb1b7f5f1ed7cbe32935f2"));
+    (0, uint256("0x0000026c0616700b1f16b428f7a5a5ec1345642cbfc821804c4516e19bd9b46c"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-	23586183, // * UNIX timestamp of last checkpoint block
+	1532878339, // * UNIX timestamp of last checkpoint block
     0,          // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     500        // * estimated number of transactions per day after checkpoint
@@ -122,11 +122,11 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x54;
-        pchMessageStart[1] = 0xdc;
-        pchMessageStart[2] = 0x12;
-        pchMessageStart[3] = 0xae;
-        vAlertPubKey = ParseHex("04d2df519f53e2eaa4a7d7ff3347a360520c2f4b8f07d0241b5b6ba5ce8e3d6ecba5443696473a387adff27aa6bb72b952ff23026e088cff9f47cbb387ed52c326");
+        pchMessageStart[0] = 0x64;
+        pchMessageStart[1] = 0xec;
+        pchMessageStart[2] = 0x22;
+        pchMessageStart[3] = 0xbe;
+        vAlertPubKey = ParseHex("02fb43a9eea1eaadf3e9698b37638d3bb4851dfb827390452f26db4234d2172f66");
         nDefaultPort = 10433;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         nSubsidyHalvingInterval = 1050000;
@@ -135,7 +135,7 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // Corallium: 1 day
+        nTargetTimespan = 2 * 60; // Corallium: 1 day
         nTargetSpacing = 2 * 60;  // Corallium: 2 minutes
         nMaturity = 50;
         nMasternodeCountDrift = 20;
@@ -167,22 +167,26 @@ public:
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 0 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04e5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363") << OP_CHECKSIG;
+        txNew.vout[0].nValue = 1 * COIN;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("02fb43a9eea1eaadf3e9698b37638d3bb4851dfb827390452f26db4234d2172f66") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1532668594;
+        genesis.nTime = 1532878339;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 23586183;
-       // MineGenesis(genesis);
-        hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x00000c1312f4202efd68ec74da3a646f4c99bd6817eb1b7f5f1ed7cbe32935f2"));
+        genesis.nNonce = 23804049;
+        MineGenesis(genesis);
+        //hashGenesisBlock = genesis.GetHash();
+        assert(hashGenesisBlock == uint256("0x0000026c0616700b1f16b428f7a5a5ec1345642cbfc821804c4516e19bd9b46c"));
         assert(genesis.hashMerkleRoot == uint256("0xdef9f4dfb66d6c99a3ae0069e6b380ba39a95d3359206f12ae2167cd527d8786"));
 
         // DNS Seeding
         vSeeds.push_back(CDNSSeedData("explorer", "140.82.0.37"));
+        vSeeds.push_back(CDNSSeedData("seed1", "67.81.213.73"));
+		vSeeds.push_back(CDNSSeedData("seed2", "67.82.52.52"));
+
+
 
         // Corallium addresses start with 'C'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 28);
@@ -210,8 +214,8 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "04026c33ff67ad40db68e7ba4f6d858a56550a7aba460857d1cf0f34af4e7d090b255928df8135ee5343df02b88801635ef054da6ef3071ce69c2c3134acad54e9";
-        strMasternodePoolDummyAddress = "GSJVWUkt6HtSCY2SaJ2akeyJUg8bg1hW3S";
+        strSporkKey = "02fb43a9eea1eaadf3e9698b37638d3bb4851dfb827390452f26db4234d2172f66";
+        strMasternodePoolDummyAddress = "Cb2ZbFfNbPGZrXcLpUxAvz1hdawEp6TvmK";
         nStartMasternodePayments = genesis.nTime + 86400; // 24 hours after genesis creation
 
         nBudget_Fee_Confirmations = 6; // Number of confirmations for the finalization fee
